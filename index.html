@@ -226,6 +226,7 @@
       letter-spacing: -.01em;
       color: var(--ink);
       margin-bottom: 6px;
+      text-wrap: balance;
     }
 
     .info-block .info-intro {
@@ -276,8 +277,8 @@
 
     .info-note {
       background: var(--tint-clay);
-      border-left: 3px solid var(--clay);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      border: 1.5px solid rgba(217,119,87,.35);
+      border-radius: var(--radius-md);
       padding: 10px 14px;
       font-size: 12.5px;
       line-height: 1.55;
@@ -446,15 +447,30 @@
       height: auto;
     }
 
-    .hero-visual .cap {
-      margin-top: 10px;
-      font-size: 13.5px;
-      color: var(--muted);
+    .integrity {
+      margin-top: 12px;
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(20,20,19,.05);
     }
 
-    .hero-visual .cap b {
-      color: var(--clay-deep);
-      font-weight: 600;
+    .integrity b {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 4px;
+      text-wrap: balance;
+    }
+
+    .integrity p {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: var(--muted);
     }
 
     /* ---------- hero foot ---------- */
@@ -501,18 +517,21 @@
       }
 
       .hero-visual {
-        width: clamp(180px, 22vw, 300px);
+        width: clamp(240px, 26vw, 340px);
         bottom: clamp(20px, 4vh, 50px);
       }
     }
 
     @media (max-height: 900px) and (min-width: 1024px) {
-      .hero-inner { padding: 26px 44px 20px; gap: 44px; }
+      .hero-inner { padding: 26px 44px 14px; gap: 44px; }
       .choices { gap: 10px; }
       .choice { padding: 10px 16px; }
       .lead { margin-bottom: 16px; }
-      .info-block { padding: 14px 18px 12px; margin-bottom: 12px; }
+      .info-block { padding: 14px 18px 12px; margin-bottom: 10px; }
       .info-list { gap: 8px; margin-bottom: 10px; }
+      .integrity { padding: 10px 12px; margin-top: 8px; }
+      .integrity b { font-size: 12px; }
+      .integrity p { font-size: 11px; }
       h1 { margin-bottom: 10px; }
       .hero-visual img { max-width: 520px; }
     }
@@ -526,10 +545,10 @@
       .pill { font-size: 9.5px; padding: 4px 9px; }
       .hero-visual {
         position: static;
-        width: min(220px, 68vw);
+        width: 100%;
         margin: 6px auto 0;
       }
-      .hero-visual .cap { text-align: center; }
+      .hero-visual img { max-width: 230px; margin: 0 auto; }
       .choice .route { display: none; }
     }
   </style>
@@ -634,7 +653,10 @@
       <div class="hero-visual">
         <img src="mascot.png"
              alt="New hire berjilbab merah tengah menelaah buku dengan kaca pembesar, tersenyum penuh semangat">
-        <p class="cap">Semangat mengerjakan, Kandidat <b>New Hire</b> — semoga sukses!</p>
+        <div class="integrity">
+          <b>Ketentuan Integritas dalam Pelaksanaan Tes Rekrutmen</b>
+          <p>Peserta wajib mengerjakan tes secara jujur dan mandiri. Segala bentuk kecurangan, termasuk menggunakan bantuan pihak lain atau sumber yang tidak diperkenankan, akan menyebabkan peserta didiskualifikasi dan hasil tes dinyatakan tidak sah.</p>
+        </div>
       </div>
 
     </div>
