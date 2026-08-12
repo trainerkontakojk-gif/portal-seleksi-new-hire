@@ -402,18 +402,28 @@
     /* ---------- hero visual — mascot blended into the page ---------- */
 
     .hero-visual {
-      position: absolute;
-      z-index: 0;
       pointer-events: none;
-      right: clamp(24px, 5vw, 80px);
-      bottom: clamp(36px, 9vh, 100px);
-      width: clamp(230px, 24vw, 430px);
+      margin: 14px auto 0;
+      width: min(320px, 50vw);
     }
 
     .hero-visual img {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    /* wide screens: blend the mascot absolute right-bottom.
+       Below 1301px the math can overlap the 860px content column, so it stays in flow. */
+    @media (min-width: 1301px) {
+      .hero-visual {
+        position: absolute;
+        z-index: 0;
+        right: clamp(24px, 5vw, 80px);
+        bottom: clamp(36px, 9vh, 100px);
+        width: clamp(230px, 24vw, 430px);
+        margin: 0;
+      }
     }
 
     .integrity {
@@ -481,11 +491,6 @@
       .hero-inner {
         gap: 30px;
         padding: 34px 24px 40px;
-      }
-
-      .hero-visual {
-        width: clamp(240px, 26vw, 340px);
-        bottom: clamp(20px, 4vh, 50px);
       }
     }
 
