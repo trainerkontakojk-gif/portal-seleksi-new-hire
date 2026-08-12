@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Seleksi New Hire</title>
+  <style>
+    :root {
+      /* surfaces — neutral off-white, chroma 0 (no AI cream band) */
+      --bg:       #F5F5F3;
+      --surface:  #FFFFFF;
+      --ink:      #141413;
+      --ink-soft: #2A2926;
+      /* accent */
+      --clay:     #D97757;
+      --clay-deep:#B05232;
+      --olive:    #5F6F4A;
+      /* neutrals — muted text hits ≥4.5:1 on --bg */
+      --muted:    #66655E;
+      --line:     #DCDBD5;
+      --line-strong:#CBCAC3;
+      --tint:     #ECEBE6;
+      --tint-clay: rgba(217,119,87,.10);
+      --tint-olive: rgba(95,111,74,.12);
+      /* shape */
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      /* type */
+      --serif: ui-serif, Georgia, "Times New Roman", serif;
+      --sans:  system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      /* elevation — border OR small shadow, never ghost-cards */
+      --shadow-hover: 0 4px 8px rgba(176,82,50,.14);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* one-screen lock (desktop) */
+    @media (min-width: 1024px) and (min-height: 780px) {
+      body { height: 100vh; overflow: hidden; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ---------- page-load choreography ---------- */
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .hero-copy > *, .hero-visual { animation: rise .55s cubic-bezier(.22,.61,.36,1) both; }
+    .hero-copy > *:nth-child(1) { animation-delay: .02s; }
+    .hero-copy > *:nth-child(2) { animation-delay: .08s; }
+    .hero-copy > *:nth-child(3) { animation-delay: .14s; }
+    .hero-copy > *:nth-child(4) { animation-delay: .20s; }
+    .hero-copy > *:nth-child(5) { animation-delay: .26s; }
+    .hero-copy > *:nth-child(6) { animation-delay: .32s; }
+    .hero-copy > *:nth-child(7) { animation-delay: .38s; }
+    .hero-visual               { animation-delay: .16s; }
+
+    /* ---------- top bar ---------- */
+
+    .topbar {
+      flex: 0 0 auto;
+      border-bottom: 1.5px solid var(--line);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(245,245,243,.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .topbar .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-right: auto;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .topbar .brand .brand-logo {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    .topbar .kontak-top {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: opacity .16s ease;
+    }
+
+    .topbar .kontak-top:hover { opacity: .78; }
+
+    .topbar .kontak-top .kontak157-top {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: var(--radius-pill);
+      padding: 5px 14px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .03em;
+      background: var(--tint);
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .pill .live {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--olive);
+    }
+
+    /* ---------- hero shell ---------- */
+
+    .hero {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      background:
+        radial-gradient(1000px 560px at 8% -8%, rgba(217,119,87,.15), transparent 62%),
+        radial-gradient(880px 540px at 96% 110%, rgba(217,119,87,.12), transparent 60%);
+    }
+
+    .hero-inner {
+      flex: 1 1 auto;
+      min-height: 0;
+      max-width: 1560px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 48px 30px;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    /* ---------- hero copy ---------- */
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--clay-deep);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(34px, 3vw, 46px);
+      line-height: 1.16;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+
+    h1 .name {
+      color: var(--clay-deep);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .lead {
+      font-size: 15.5px;
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 22px;
+    }
+
+    .cta-line {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .cta-line .accent {
+      color: var(--clay-deep);
+    }
+
+    /* ---------- choice buttons ---------- */
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      text-decoration: none;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .choice:hover {
+      transform: translateY(-1px);
+      border-color: var(--clay);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .choice:focus-visible {
+      outline: 3px solid rgba(217,119,87,.45);
+      outline-offset: 2px;
+    }
+
+    .choice .num {
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--tint-clay);
+      color: var(--clay-deep);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .choice .tt {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .choice .tt .t1 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+    .choice .route {
+      flex: 0 0 auto;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+
+    .route.all  { background: var(--tint-olive); color: var(--olive); }
+    .route.ops  { background: var(--tint-clay);  color: var(--clay-deep); }
+    .route.slik { background: var(--tint-clay);  color: var(--clay-deep); }
+
+    .choice .arr {
+      flex: 0 0 auto;
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--clay);
+      transition: transform .16s ease;
+    }
+
+    .choice:hover .arr { transform: translateX(3px); }
+
+    /* ---------- mini flow + note ---------- */
+
+    .mini-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .mini-flow .mf {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .04em;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-pill);
+      padding: 4px 11px;
+      white-space: nowrap;
+    }
+
+    .mini-flow .mf.hot {
+      color: var(--clay-deep);
+      border-color: rgba(217,119,87,.5);
+      background: var(--tint-clay);
+    }
+
+    .mini-flow .ar {
+      color: var(--clay);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .note-line {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .note-line b { color: var(--ink); font-weight: 600; }
+
+
+    /* ---------- hero visual — mascot blended into the page ---------- */
+
+    .hero-visual {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual img {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 580px;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .hero-visual .cap {
+      position: relative;
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .hero-visual .cap b {
+      color: var(--clay-deep);
+      font-weight: 600;
+    }
+
+    /* ---------- hero foot ---------- */
+
+    .hero-foot {
+      flex: 0 0 auto;
+      border-top: 1.5px solid var(--line);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-foot span {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: var(--muted);
+    }
+
+
+    .hero-foot .foot-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-foot .foot-right .sep {
+      opacity: .45;
+    }
+
+
+
+    /* ---------- responsive ---------- */
+
+    @media (max-width: 1023px), (max-height: 779px) {
+      body { overflow-y: auto; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 34px 24px 40px;
+      }
+
+      .hero-visual { height: auto; }
+
+      .hero-visual img { max-width: 420px; margin: 0 auto; }
+    }
+
+    @media (max-height: 900px) and (min-width: 1024px) {
+      .hero-inner { padding: 26px 44px 20px; gap: 44px; }
+      .choices { gap: 10px; }
+      .choice { padding: 10px 16px; }
+      .lead { margin-bottom: 16px; }
+      h1 { margin-bottom: 10px; }
+      .hero-visual img { max-width: 520px; }
+    }
+
+    @media (max-width: 520px) {
+      .topbar { padding: 12px 16px; }
+      .topbar .brand { font-size: 10px; letter-spacing: .03em; gap: 8px; }
+      .topbar .brand .brand-logo { height: 26px; }
+      .topbar .brand .brand-sub { display: none; }
+      .topbar .kontak-top .kontak157-top { height: 30px; }
+      .pill { font-size: 9px; padding: 3px 8px; }
+      .choice .route { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= TOP BAR ================= -->
+  <div class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="ojk-logo.png" alt="Logo Otoritas Jasa Keuangan (OJK)">
+      <span>Portal Seleksi <span class="brand-sub">· New Hire</span></span>
+    </div>
+    <a class="kontak-top" href="tel:157" aria-label="Kontak OJK 157">
+      <img class="kontak157-top" src="kontak157.png" alt="Logo Kontak OJK 157">
+    </a>
+    <span class="pill"><span class="live"></span> Portal Kandidat</span>
+  </div>
+
+  <!-- ================= HERO (single screen) ================= -->
+  <main class="hero">
+
+    <div class="hero-inner">
+
+      <!-- left: copy + 3 main buttons -->
+      <div class="hero-copy">
+        <div class="eyebrow">HR Recruitment &middot; Portal Kandidat</div>
+        <h1>Selamat datang, Kandidat <span class="name">New Hire</span>!</h1>
+        <p class="lead">
+          Proses seleksi terdiri dari 2 tahap. Tahap 1 merupakan seleksi awal
+          yang wajib diikuti oleh seluruh peserta. Setelah menyelesaikannya,
+          lanjutkan ke Tahap 2 sesuai jalur spesialisasi yang kamu daftarkan:
+          Operasional atau SLIK. Pastikan memilih jalur Tahap 2 yang sesuai
+          sebelum mulai mengerjakan.
+        </p>
+        <p class="cta-line">Siap? <span class="accent">Mulai seleksimu</span> dan tunjukkan kemampuan terbaikmu.</p>
+
+        <div class="choices">
+
+          <!-- GANTI: tautan form Seleksi Tahap 1 di bawah ini -->
+          <a class="choice" href="https://forms.example.com/seleksi-tahap-1" target="_blank" rel="noopener">
+            <span class="num">01</span>
+            <span class="tt">
+              <span class="t1">Seleksi Tahap 1</span>
+            </span>
+            <span class="route all">Semua Kandidat</span>
+            <span class="arr">→</span>
+          </a>
+
+          <!-- GANTI: tautan form Seleksi Tahap 2 CCA OPS di bawah ini -->
+          <a class="choice" href="https://forms.example.com/seleksi-tahap-2-ops" target="_blank" rel="noopener">
+            <span class="num">02</span>
+            <span class="tt">
+              <span class="t1">Seleksi Tahap 2 — CCA OPS</span>
+            </span>
+            <span class="route ops">Jalur OPS</span>
+            <span class="arr">→</span>
+          </a>
+
+          <!-- GANTI: tautan form Seleksi Tahap 2 CCA SLIK di bawah ini -->
+          <a class="choice" href="https://forms.example.com/seleksi-tahap-2-slik" target="_blank" rel="noopener">
+            <span class="num">02</span>
+            <span class="tt">
+              <span class="t1">Seleksi Tahap 2 — CCA SLIK</span>
+            </span>
+            <span class="route slik">Jalur SLIK</span>
+            <span class="arr">→</span>
+          </a>
+
+        </div>
+
+        <div class="mini-flow">
+          <span class="mf hot">Tahap 1</span>
+          <span class="ar">→</span>
+          <span class="mf">Tahap 2 · OPS / SLIK</span>
+          <span class="ar">→</span>
+          <span class="mf">Interview</span>
+        </div>
+
+        <p class="note-line">
+          Kerjakan soal seleksi sesuai dengan <b>arahan</b>, jika ada kendala
+          teknis hubungi <b>panitia/trainer</b>.
+          <!-- GANTI: ganti "panitia/trainer" dengan nama kontak panitia bila perlu -->
+        </p>
+      </div>
+
+      <!-- right: mascot illustration, blended into the surface -->
+      <div class="hero-visual">
+        <img src="mascot.png"
+             alt="New hire berjilbab merah tengah menelaah buku dengan kaca pembesar, tersenyum penuh semangat">
+        <p class="cap">Semangat mengerjakan, Kandidat <b>New Hire</b> — semoga sukses!</p>
+      </div>
+
+    </div>
+
+    <!-- ================= HERO FOOT ================= -->
+    <div class="hero-foot">
+      <span>PORTAL SELEKSI · NEW HIRE</span>
+      <span>HR RECRUITMENT · TRAINER</span>
+    </div>
+
+  </main>
+
+</body>
+</html>
