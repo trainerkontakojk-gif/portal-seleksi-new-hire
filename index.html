@@ -123,21 +123,19 @@
     }
 
 
-    .pill {
+    .status {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      border-radius: var(--radius-pill);
-      padding: clamp(9px, .9vw, 12px) clamp(16px, 1.8vw, 24px);
+      gap: 8px;
       font-family: var(--mono);
       font-size: clamp(12px, 1vw, 15px);
-      letter-spacing: .03em;
-      background: var(--tint);
+      letter-spacing: .06em;
+      text-transform: uppercase;
       color: var(--ink);
       white-space: nowrap;
     }
 
-    .pill .live {
+    .status .live {
       width: 9px; height: 9px;
       border-radius: 50%;
       background: var(--olive);
@@ -542,7 +540,7 @@
       .topbar .brand .brand-logo { height: 30px; }
       .topbar .brand .brand-sub { display: none; }
       .topbar .kontak-top .kontak157-top { height: 34px; }
-      .pill { font-size: 9.5px; padding: 4px 9px; }
+      .status { font-size: 9.5px; }
       .hero-visual {
         position: static;
         width: 100%;
@@ -564,7 +562,7 @@
     <a class="kontak-top" href="tel:157" aria-label="Kontak OJK 157">
       <img class="kontak157-top" src="kontak157.png" alt="Logo Kontak OJK 157">
     </a>
-    <span class="pill"><span class="live"></span> Portal Kandidat</span>
+    <span class="status"><span class="live"></span> Portal Kandidat</span>
   </div>
 
   <!-- ================= HERO (single screen) ================= -->
