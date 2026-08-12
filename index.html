@@ -509,6 +509,16 @@
       .integrity { margin-top: 10px; }
     }
 
+    /* desktop: rail kanan sticky — mengunci ilustrasi + kartu ketentuan
+       selama kolom kiri di-scroll */
+    @media (min-width: 1024px) {
+      .hero-visual {
+        position: sticky;
+        top: clamp(16px, 4vh, 32px);
+        align-self: start;
+      }
+    }
+
     /* mobile: compact mascot + integrity right after the heading */
     @media (max-width: 699px) {
       .hero-inner {
