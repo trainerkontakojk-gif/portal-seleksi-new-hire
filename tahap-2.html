@@ -70,9 +70,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      background: rgba(245,245,243,.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: var(--bg);
     }
 
     .topbar .brand {
@@ -88,7 +86,7 @@
       display: block;
     }
 
-    .topbar .back {
+    .back {
       display: inline-flex;
       align-items: center;
       gap: 7px;
@@ -103,21 +101,36 @@
       text-decoration: none;
       white-space: nowrap;
       transition: border-color .16s ease, color .16s ease;
+      margin-bottom: 22px;
     }
 
-    .topbar .back:hover {
+    .back:hover {
       border-color: var(--clay);
       color: var(--clay-deep);
+    }
+
+    .back:focus-visible {
+      outline: 3px solid var(--clay-deep);
+      outline-offset: 3px;
     }
 
     .topbar .kontak-top {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
       text-decoration: none;
       transition: opacity .16s ease;
     }
 
     .topbar .kontak-top:hover { opacity: .78; }
+
+    .topbar .kontak-top:focus-visible {
+      outline: 3px solid var(--clay-deep);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
 
     .topbar .kontak-top .kontak157-top {
       height: clamp(54px, 4.4vw, 78px);
@@ -133,9 +146,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background:
-        radial-gradient(900px 520px at 10% -10%, rgba(217,119,87,.12), transparent 60%),
-        radial-gradient(800px 500px at 92% 112%, rgba(217,119,87,.10), transparent 60%);
+      background: var(--bg);
     }
 
     .main-inner {
@@ -213,20 +224,20 @@
     }
 
     .action .icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      background: linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%);
-      box-shadow: 0 4px 10px rgba(176,82,50,.22);
+      background: var(--clay-deep);
     }
 
     .action.ghost .icon {
-      background: var(--ink);
-      box-shadow: 0 4px 10px rgba(20,20,19,.18);
+      background: transparent;
+      color: var(--clay-deep);
+      border: 1.5px solid var(--clay-deep);
     }
 
     .action .icon svg { width: 22px; height: 22px; }
@@ -246,39 +257,48 @@
     .action .go {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      width: 100%;
-      border: none;
-      cursor: pointer;
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
+      gap: 8px;
       font-size: 13.5px;
       font-weight: 600;
       font-family: var(--sans);
       text-decoration: none;
-      color: #fff;
-      background: linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%);
-      transition: transform .16s ease, box-shadow .16s ease;
+      color: var(--clay-deep);
+      margin-top: 14px;
     }
 
     .action.ghost .go {
-      background: linear-gradient(135deg, var(--ink) 0%, #2C2B27 100%);
+      color: var(--clay-deep);
     }
 
     .action .go:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(20,20,19,.22);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .action .go .arr {
       font-family: var(--mono);
       font-size: 14px;
-      opacity: .75;
       transition: transform .16s ease, opacity .16s ease;
     }
 
     .action .go:hover .arr { transform: translateX(3px); opacity: 1; }
+
+    /* primary (Akses Ujian) vs secondary (Panduan & Lampiran) */
+
+    .action.primary {
+      background: var(--clay-deep);
+      border-color: var(--clay-deep);
+    }
+
+    .action.primary .at { color: #fff; }
+    .action.primary .ad { color: rgba(255,255,255,.92); }
+    .action.primary .go { color: #fff; }
+    .action.primary .icon { background: rgba(255,255,255,.16); }
+
+    .action.ghost {
+      background: var(--surface);
+      border-color: var(--clay-deep);
+    }
 
     .note-line {
       font-size: 13px;
@@ -331,9 +351,6 @@
     <div class="brand">
       <img class="brand-logo" src="ojk-logo.png" alt="Logo Otoritas Jasa Keuangan (OJK)">
     </div>
-    <a class="back" href="index.html">
-      <span aria-hidden="true">←</span> <span class="back-label">Kembali ke Beranda</span>
-    </a>
     <a class="kontak-top" href="tel:157" aria-label="Kontak OJK 157">
       <img class="kontak157-top" src="kontak157.png" alt="Logo Kontak OJK 157">
     </a>
@@ -342,6 +359,10 @@
   <!-- ================= MAIN ================= -->
   <main class="main">
     <div class="main-inner">
+
+      <a class="back" href="index.html">
+        <span aria-hidden="true">←</span> <span class="back-label">Kembali ke Beranda</span>
+      </a>
 
       <div class="eyebrow" id="eyebrow">Tahap 2 · Seleksi Lanjutan</div>
       <h1 id="title">Seleksi Tahap 2</h1>
@@ -368,7 +389,7 @@
         </a>
 
         <!-- GANTI: tautan akses ujian Tahap 2 -->
-        <a class="action" href="https://forms.example.com/ujian-tahap-2">
+        <a class="action primary" href="https://forms.example.com/ujian-tahap-2">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M22 10L12 5 2 10l10 5 10-5z"/>
