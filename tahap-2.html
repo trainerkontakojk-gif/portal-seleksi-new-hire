@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seleksi Tahap 2 — Portal Seleksi New Hire</title>
+  <title>Seleksi Tahap 2 · Portal Seleksi New Hire</title>
+  <script src="config.js"></script>
   <style>
     :root {
       --bg:       #F5F5F3;
@@ -302,6 +303,31 @@
 
     .note-line b { color: var(--ink); font-weight: 600; }
 
+    /* ---------- locked state (Tahap 2 belum dibuka) ---------- */
+
+    .lock-msg {
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .lock-msg b {
+      display: block;
+      font-size: 16px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .lock-msg p {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
     /* ---------- footer ---------- */
 
     .hero-foot {
@@ -414,6 +440,27 @@
   </div>
 
   <script>
+    // Kunci halaman bila Tahap 2 belum dibuka (config.js)
+    (function () {
+      if (window.PORTAL_CONFIG && !window.PORTAL_CONFIG.stage2Open) {
+        var actions = document.querySelector(".actions");
+        var note = document.querySelector(".note-line");
+        var main = document.querySelector(".main-inner");
+        var back = document.querySelector(".back");
+        if (actions) actions.remove();
+        if (note) note.remove();
+        if (main) {
+          var msg = document.createElement("div");
+          msg.className = "lock-msg";
+          msg.innerHTML =
+            "<b>Seleksi Tahap 2 belum dibuka.</b>" +
+            "<p>Mohon menunggu pengumuman dari panitia/trainer. " +
+            "Halaman ini akan aktif setelah Tahap 1 selesai dilaksanakan.</p>";
+          main.insertBefore(msg, back || null);
+        }
+      }
+    })();
+
     // Jalur spesialisasi dari URL (?jalur=ops / ?jalur=slik) — halaman tetap
     // berfungsi tanpa param (tampil netral "Seleksi Tahap 2").
     (function () {

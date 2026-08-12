@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Seleksi New Hire</title>
+  <script src="config.js"></script>
   <style>
     :root {
       /* surfaces — neutral off-white, chroma 0 (no AI cream band) */
@@ -303,6 +304,12 @@
     .choice:focus-visible {
       outline: 3px solid var(--clay-deep);
       outline-offset: 3px;
+    }
+
+    .choice.disabled {
+      opacity: .55;
+      pointer-events: none;
+      cursor: default;
     }
 
     .choice .num {
@@ -650,7 +657,7 @@
           </a>
 
           <!-- GANTI: tautan form Seleksi Tahap 2 CCA OPS di bawah ini -->
-          <a class="choice" href="tahap-2.html?jalur=ops">
+          <a class="choice" id="choice-ops" href="tahap-2.html?jalur=ops">
             <span class="num">02</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 2 — CCA OPS</span>
@@ -660,7 +667,7 @@
           </a>
 
           <!-- GANTI: tautan form Seleksi Tahap 2 CCA SLIK di bawah ini -->
-          <a class="choice" href="tahap-2.html?jalur=slik">
+          <a class="choice" id="choice-slik" href="tahap-2.html?jalur=slik">
             <span class="num">02</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 2 — CCA SLIK</span>
@@ -705,6 +712,24 @@
     </div>
 
   </main>
+
+  <script>
+    // Nonaktifkan tombol Tahap 2 bila belum dibuka (config.js)
+    (function () {
+      if (window.PORTAL_CONFIG && !window.PORTAL_CONFIG.stage2Open) {
+        ["choice-ops", "choice-slik"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) {
+            el.classList.add("disabled");
+            el.setAttribute("aria-disabled", "true");
+            el.removeAttribute("href");
+            var route = el.querySelector(".route");
+            if (route) route.textContent = "Belum Dibuka";
+          }
+        });
+      }
+    })();
+  </script>
 
 </body>
 </html>
