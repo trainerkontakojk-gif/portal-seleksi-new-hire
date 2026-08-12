@@ -164,11 +164,11 @@
       max-width: 1560px;
       width: 100%;
       margin: 0 auto;
-      padding: 40px 48px 30px;
+      padding: 34px 48px 26px;
       display: grid;
       grid-template-columns: minmax(0, 860px);
       justify-content: start;
-      gap: 30px;
+      gap: 24px;
       align-items: center;
     }
 
@@ -206,6 +206,87 @@
       color: var(--muted);
       max-width: 60ch;
       margin-bottom: 22px;
+    }
+
+    /* ---------- info block (tahapan seleksi) ---------- */
+
+    .info-block {
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(20,20,19,.04);
+    }
+
+    .info-block .info-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .info-block .info-intro {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .info-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .info-list li::before {
+      content: attr(data-n);
+      flex: 0 0 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--tint-clay);
+      color: var(--clay-deep);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .info-list li b {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 1px;
+    }
+
+    .info-note {
+      background: var(--tint-clay);
+      border-left: 3px solid var(--clay);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .info-note b {
+      color: var(--clay-deep);
+      font-weight: 600;
     }
 
     .cta-line {
@@ -430,6 +511,8 @@
       .choices { gap: 10px; }
       .choice { padding: 10px 16px; }
       .lead { margin-bottom: 16px; }
+      .info-block { padding: 14px 18px 12px; margin-bottom: 12px; }
+      .info-list { gap: 8px; margin-bottom: 10px; }
       h1 { margin-bottom: 10px; }
       .hero-visual img { max-width: 520px; }
     }
@@ -474,13 +557,28 @@
       <div class="hero-copy">
         <div class="eyebrow">HR Recruitment &middot; Portal Kandidat</div>
         <h1>Selamat datang, Kandidat <span class="name">New Hire</span>!</h1>
-        <p class="lead">
-          Proses seleksi terdiri dari 2 tahap. Tahap 1 merupakan seleksi awal
-          yang wajib diikuti oleh seluruh peserta. Setelah menyelesaikannya,
-          lanjutkan ke Tahap 2 sesuai jalur spesialisasi yang kamu daftarkan:
-          Operasional atau SLIK. Pastikan memilih jalur Tahap 2 yang sesuai
-          sebelum mulai mengerjakan.
-        </p>
+        <div class="info-block">
+          <h2 class="info-title">Informasi Tahapan Seleksi Calon Petugas Kontak OJK 157 Tahun 2026</h2>
+          <p class="info-intro">Berikut beberapa informasi mengenai tahapan seleksi calon petugas Kontak OJK 157 Tahun 2026:</p>
+          <ol class="info-list">
+            <li data-n="1">
+              <div>
+                <b>Tahap 1</b>
+                <span>Pada tahap ini, seluruh kandidat wajib mengikuti dan mengerjakan seluruh rangkaian tes hingga selesai.</span>
+              </div>
+            </li>
+            <li data-n="2">
+              <div>
+                <b>Tahap 2</b>
+                <span>Pada tahap kedua, kandidat yang lolos pada tahap pertama akan mengerjakan soal dan tugas yang telah disiapkan oleh panitia/trainer sesuai dengan posisi yang dilamar, yaitu Contact Center Agent (CCA) atau Contact Center Agent (CCA) Sistem Layanan Informasi Keuangan (SLIK).</span>
+              </div>
+            </li>
+          </ol>
+          <div class="info-note">
+            <b>Catatan:</b>
+            <span>Contact Center Agent (CCA) adalah petugas yang melayani konsumen melalui kanal telepon (call), email, dan digital chat. Sementara itu, Contact Center Agent (CCA) Sistem Layanan Informasi Keuangan (SLIK) adalah petugas yang memberikan pelayanan terkait SLIK secara walk-in/tatap muka.</span>
+          </div>
+        </div>
         <p class="cta-line">Siap? <span class="accent">Mulai seleksimu</span> dan tunjukkan kemampuan terbaikmu.</p>
 
         <div class="choices">
