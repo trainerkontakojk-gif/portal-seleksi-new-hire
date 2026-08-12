@@ -35,7 +35,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body { height: 100%; }
+    html, body { min-height: 100%; }
 
     body {
       background: var(--bg);
@@ -116,18 +116,16 @@
 
     .hero {
       position: relative;
-      flex: 1 1 auto;
+      flex: 1 0 auto;
       display: flex;
       flex-direction: column;
-      min-height: 0;
       background: var(--bg);
     }
 
     .hero-inner {
       position: relative;
       z-index: 1;
-      flex: 1 1 auto;
-      min-height: 0;
+      flex: 1 0 auto;
       max-width: 1560px;
       width: 100%;
       margin: 0 auto;
