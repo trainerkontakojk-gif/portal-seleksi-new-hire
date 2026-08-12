@@ -362,8 +362,8 @@
 
       <div class="actions">
 
-        <!-- GANTI: tautan panduan & lampiran Tahap 2 -->
-        <a class="action ghost" href="https://forms.example.com/panduan-tahap-2" target="_blank" rel="noopener">
+        <!-- GANTI: tautan panduan & lampiran Tahap 2 (jalur OPS) — jalur SLIK otomatis memakai PDF OJK -->
+        <a class="action ghost" id="panduan-link" href="https://forms.example.com/panduan-tahap-2" target="_blank" rel="noopener">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -418,6 +418,10 @@
         title.innerHTML = "Seleksi Tahap 2 — <span class=\"name\">" + nama + "</span>";
         eyebrow.textContent = "Tahap 2 · Jalur " + nama;
         document.title = "Seleksi Tahap 2 — " + nama + " · Portal Seleksi New Hire";
+      }
+      if (j === "slik") {
+        var pl = document.getElementById("panduan-link");
+        pl.href = "https://drive.google.com/file/d/1bZdMDsXj1nTQNLTu-fapmzJppGkQUUDT/view?usp=sharing";
       }
     })();
   </script>
