@@ -95,7 +95,7 @@
       gap: 14px;
       margin-right: auto;
       font-family: var(--mono);
-      font-size: clamp(13px, 1.05vw, 17px);
+      font-size: clamp(14px, 1.25vw, 19px);
       letter-spacing: .06em;
       text-transform: uppercase;
       color: var(--ink);
@@ -128,9 +128,9 @@
       align-items: center;
       gap: 7px;
       border-radius: var(--radius-pill);
-      padding: clamp(8px, .8vw, 11px) clamp(14px, 1.6vw, 22px);
+      padding: clamp(9px, .9vw, 12px) clamp(16px, 1.8vw, 24px);
       font-family: var(--mono);
-      font-size: clamp(11.5px, .9vw, 14px);
+      font-size: clamp(12px, 1vw, 15px);
       letter-spacing: .03em;
       background: var(--tint);
       color: var(--ink);
@@ -138,7 +138,7 @@
     }
 
     .pill .live {
-      width: 8px; height: 8px;
+      width: 9px; height: 9px;
       border-radius: 50%;
       background: var(--olive);
     }
@@ -146,6 +146,7 @@
     /* ---------- hero shell ---------- */
 
     .hero {
+      position: relative;
       flex: 1 1 auto;
       display: flex;
       flex-direction: column;
@@ -156,6 +157,8 @@
     }
 
     .hero-inner {
+      position: relative;
+      z-index: 1;
       flex: 1 1 auto;
       min-height: 0;
       max-width: 1560px;
@@ -163,8 +166,9 @@
       margin: 0 auto;
       padding: 40px 48px 30px;
       display: grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap: 56px;
+      grid-template-columns: minmax(0, 860px);
+      justify-content: start;
+      gap: 30px;
       align-items: center;
     }
 
@@ -347,27 +351,21 @@
     /* ---------- hero visual — mascot blended into the page ---------- */
 
     .hero-visual {
-      position: relative;
-      min-width: 0;
-      min-height: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      right: clamp(24px, 5vw, 80px);
+      bottom: clamp(36px, 9vh, 100px);
+      width: clamp(230px, 24vw, 430px);
     }
 
     .hero-visual img {
-      position: relative;
       display: block;
       width: 100%;
-      max-width: 580px;
-      max-height: 100%;
-      object-fit: contain;
+      height: auto;
     }
 
     .hero-visual .cap {
-      position: relative;
       margin-top: 10px;
       font-size: 13.5px;
       color: var(--muted);
@@ -417,14 +415,14 @@
       body { overflow-y: auto; }
 
       .hero-inner {
-        grid-template-columns: 1fr;
         gap: 30px;
         padding: 34px 24px 40px;
       }
 
-      .hero-visual { height: auto; }
-
-      .hero-visual img { max-width: 420px; margin: 0 auto; }
+      .hero-visual {
+        width: clamp(180px, 22vw, 300px);
+        bottom: clamp(20px, 4vh, 50px);
+      }
     }
 
     @media (max-height: 900px) and (min-width: 1024px) {
@@ -437,12 +435,18 @@
     }
 
     @media (max-width: 520px) {
-      .topbar { padding: 14px 16px; }
-      .topbar .brand { font-size: 11px; letter-spacing: .03em; gap: 9px; }
-      .topbar .brand .brand-logo { height: 34px; }
+      .topbar { padding: 12px 14px; gap: 10px; }
+      .topbar .brand { font-size: 11px; letter-spacing: .03em; gap: 8px; }
+      .topbar .brand .brand-logo { height: 30px; }
       .topbar .brand .brand-sub { display: none; }
-      .topbar .kontak-top .kontak157-top { height: 38px; }
-      .pill { font-size: 10px; padding: 5px 11px; }
+      .topbar .kontak-top .kontak157-top { height: 34px; }
+      .pill { font-size: 9.5px; padding: 4px 9px; }
+      .hero-visual {
+        position: static;
+        width: min(220px, 68vw);
+        margin: 6px auto 0;
+      }
+      .hero-visual .cap { text-align: center; }
       .choice .route { display: none; }
     }
   </style>
