@@ -48,11 +48,6 @@
       flex-direction: column;
     }
 
-    /* one-screen lock (desktop) */
-    @media (min-width: 1024px) and (min-height: 780px) {
-      body { height: 100vh; overflow: hidden; }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -93,11 +88,6 @@
       align-items: center;
       gap: 14px;
       margin-right: auto;
-      font-family: var(--mono);
-      font-size: clamp(14px, 1.25vw, 19px);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--ink);
     }
 
     .topbar .brand .brand-logo {
@@ -121,24 +111,6 @@
       display: block;
     }
 
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: clamp(12px, 1vw, 15px);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--ink);
-      white-space: nowrap;
-    }
-
-    .status .live {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: var(--olive);
-    }
 
     /* ---------- hero shell ---------- */
 
@@ -506,8 +478,6 @@
     /* ---------- responsive ---------- */
 
     @media (max-width: 1023px), (max-height: 779px) {
-      body { overflow-y: auto; }
-
       .hero-inner {
         gap: 30px;
         padding: 34px 24px 40px;
@@ -519,27 +489,10 @@
       }
     }
 
-    @media (max-height: 900px) and (min-width: 1024px) {
-      .hero-inner { padding: 26px 44px 14px; gap: 44px; }
-      .choices { gap: 10px; }
-      .choice { padding: 10px 16px; }
-      .lead { margin-bottom: 16px; }
-      .info-block { padding: 14px 18px 12px; margin-bottom: 10px; }
-      .info-list { gap: 8px; margin-bottom: 10px; }
-      .integrity { padding: 10px 12px; margin-top: 8px; }
-      .integrity b { font-size: 12px; }
-      .integrity p { font-size: 11px; }
-      h1 { margin-bottom: 10px; }
-      .hero-visual img { max-width: 520px; }
-    }
-
     @media (max-width: 520px) {
       .topbar { padding: 12px 14px; gap: 10px; }
-      .topbar .brand { font-size: 11px; letter-spacing: .03em; gap: 8px; }
       .topbar .brand .brand-logo { height: 30px; }
-      .topbar .brand .brand-sub { display: none; }
       .topbar .kontak-top .kontak157-top { height: 34px; }
-      .status { font-size: 9.5px; }
       .hero-visual {
         position: static;
         width: 100%;
@@ -556,12 +509,10 @@
   <div class="topbar">
     <div class="brand">
       <img class="brand-logo" src="ojk-logo.png" alt="Logo Otoritas Jasa Keuangan (OJK)">
-      <span>Portal Seleksi <span class="brand-sub">· New Hire</span></span>
     </div>
     <a class="kontak-top" href="tel:157" aria-label="Kontak OJK 157">
       <img class="kontak157-top" src="kontak157.png" alt="Logo Kontak OJK 157">
     </a>
-    <span class="status"><span class="live"></span> Portal Kandidat</span>
   </div>
 
   <!-- ================= HERO (single screen) ================= -->

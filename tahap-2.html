@@ -80,11 +80,6 @@
       align-items: center;
       gap: 14px;
       margin-right: auto;
-      font-family: var(--mono);
-      font-size: clamp(14px, 1.25vw, 19px);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--ink);
     }
 
     .topbar .brand .brand-logo {
@@ -322,9 +317,7 @@
 
     @media (max-width: 520px) {
       .topbar { padding: 14px 16px; }
-      .topbar .brand { font-size: 12px; letter-spacing: .03em; gap: 9px; }
       .topbar .brand .brand-logo { height: 34px; }
-      .topbar .brand .brand-sub { display: none; }
       .topbar .back { padding: 8px 13px; }
       .topbar .back .back-label { display: none; }
       .topbar .kontak-top .kontak157-top { height: 38px; }
@@ -337,7 +330,6 @@
   <div class="topbar">
     <div class="brand">
       <img class="brand-logo" src="ojk-logo.png" alt="Logo Otoritas Jasa Keuangan (OJK)">
-      <span>Portal Seleksi <span class="brand-sub">· New Hire</span></span>
     </div>
     <a class="back" href="index.html">
       <span aria-hidden="true">←</span> <span class="back-label">Kembali ke Beranda</span>
