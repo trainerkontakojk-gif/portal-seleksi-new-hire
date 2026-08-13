@@ -434,6 +434,26 @@
       border: 0;
       background: #fff;
     }
+
+    .lightbox-imgs {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      background: #fff;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .lightbox-imgs img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
@@ -462,8 +482,8 @@
 
       <div class="actions">
 
-        <!-- GANTI: tautan panduan Tahap 2 (jalur OPS) — jalur SLIK diganti otomatis oleh skrip di bawah -->
-        <a class="action ghost" id="panduan-link" data-preview href="https://drive.google.com/file/d/1wKy55UISHY4kT0079A7wYn-stdmSrhti/preview" target="_blank" rel="noopener">
+        <!-- GANTI: tautan panduan Tahap 2 (jalur OPS) — tampil sebagai gambar halaman panduan; jalur SLIK diganti otomatis oleh skrip di bawah -->
+        <a class="action ghost" id="panduan-link" data-images="panduan-tahap2-ops-1.png,panduan-tahap2-ops-2.png" href="panduan-tahap2-ops-1.png" target="_blank" rel="noopener">
           <span class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -545,10 +565,12 @@
         document.title = "Seleksi Tahap 2 — " + nama + " · Portal Seleksi New Hire";
       }
       if (j === "slik") {
-        var pl = document.getElementById("panduan-link");
-        pl.href = "https://drive.google.com/file/d/1V1-M2-z5dEO4PMebEzJDlBdBPoT7Rs11/preview";
-        var ul = document.getElementById("ujian-link");
-        ul.href = "https://www.flexiquiz.com/SC/N/SeleksiNewHireCcaSlik";
+      var pl = document.getElementById("panduan-link");
+      pl.href = "https://drive.google.com/file/d/1V1-M2-z5dEO4PMebEzJDlBdBPoT7Rs11/preview";
+      pl.setAttribute("data-preview", "");
+      pl.removeAttribute("data-images");
+      var ul = document.getElementById("ujian-link");
+      ul.href = "https://www.flexiquiz.com/SC/N/SeleksiNewHireCcaSlik";
       }
     })();
 
@@ -556,10 +578,29 @@
     document.addEventListener("DOMContentLoaded", function () {
       var lb = document.getElementById("lightbox");
       var frame = document.getElementById("lb-frame");
+      var imgs = document.getElementById("lb-imgs");
       var close = document.getElementById("lb-close");
-      if (!lb || !frame || !close) return;
-      function openLb(url) {
-        frame.src = url;
+      if (!lb || !frame || !imgs || !close) return;
+      function openLb(a) {
+        if (a.hasAttribute("data-preview")) {
+          imgs.hidden = true;
+          imgs.innerHTML = "";
+          frame.hidden = false;
+          frame.src = a.href;
+        } else if (a.dataset.images) {
+          frame.hidden = true;
+          frame.src = "";
+          imgs.hidden = false;
+          imgs.innerHTML = "";
+          a.dataset.images.split(",").forEach(function (src) {
+            var img = document.createElement("img");
+            img.src = src.trim();
+            img.alt = "Halaman panduan";
+            imgs.appendChild(img);
+          });
+        } else {
+          return;
+        }
         lb.hidden = false;
         document.body.style.overflow = "hidden";
         close.focus();
@@ -567,12 +608,13 @@
       function closeLb() {
         lb.hidden = true;
         frame.src = "";
+        imgs.innerHTML = "";
         document.body.style.overflow = "";
       }
-      [].forEach.call(document.querySelectorAll("a[data-preview]"), function (a) {
+      [].forEach.call(document.querySelectorAll("a[data-preview], a[data-images]"), function (a) {
         a.addEventListener("click", function (e) {
           e.preventDefault();
-          openLb(a.href);
+          openLb(a);
         });
       });
       close.addEventListener("click", closeLb);
@@ -590,6 +632,7 @@
       <button type="button" class="lightbox-close" id="lb-close">Tutup</button>
     </div>
     <iframe class="lightbox-frame" id="lb-frame" title="Pratinjau dokumen" loading="lazy"></iframe>
+    <div class="lightbox-imgs" id="lb-imgs" hidden></div>
   </div>
 </div>
 </body>
