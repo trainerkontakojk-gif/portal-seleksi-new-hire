@@ -596,6 +596,152 @@
       .topbar .brand .brand-logo { height: 38px; }
       .topbar .kontak-top .kontak157-top { height: 38px; }
     }
+
+    /* ---------- popup ketentuan seleksi ---------- */
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: rgba(24, 26, 27, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(14px, 3vw, 40px);
+    }
+
+    .popup[hidden] { display: none; }
+
+    .popup-panel {
+      position: relative;
+      width: min(720px, 100%);
+      max-height: min(82vh, 100%);
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .popup-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1.5px solid var(--line);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .popup-bar .date { color: var(--clay-deep); white-space: nowrap; }
+
+    .popup-close {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 7px 14px;
+      cursor: pointer;
+      transition: border-color .16s ease, color .16s ease;
+    }
+
+    .popup-close:hover { border-color: var(--clay); color: var(--clay-deep); }
+
+    .popup-close:focus-visible,
+    .popup-cta:focus-visible {
+      outline: 3px solid var(--clay-deep);
+      outline-offset: 2px;
+    }
+
+    .popup-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 22px 24px 8px;
+    }
+
+    .popup-body h2 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      line-height: 1.3;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+
+    .popup-rules {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: rule;
+    }
+
+    .popup-rules li {
+      position: relative;
+      counter-increment: rule;
+      padding: 10px 0 10px 40px;
+      border-top: 1px solid var(--line);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .popup-rules li::before {
+      content: counter(rule, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 11px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: var(--clay-deep);
+    }
+
+    .popup-rules li b { color: var(--ink); font-weight: 700; }
+
+    .popup-rules .sub {
+      display: block;
+      padding: 4px 0 0 22px;
+    }
+
+    .popup-note {
+      margin: 14px 0 0;
+      padding-top: 14px;
+      border-top: 1.5px solid var(--line);
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .popup-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding: 14px 24px 20px;
+    }
+
+    .popup-cta {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--clay-deep);
+      border: 0;
+      border-radius: var(--radius-md);
+      padding: 11px 22px;
+      cursor: pointer;
+      transition: opacity .16s ease;
+    }
+
+    .popup-cta:hover { opacity: .85; }
   </style>
 </head>
 <body>
@@ -716,6 +862,39 @@
 
   </main>
 
+  <!-- ================= POPUP KETENTUAN SELEKSI ================= -->
+  <div class="popup" id="popup" hidden>
+    <div class="popup-panel" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="popup-bar">
+        <span>Ketentuan Seleksi <span class="date">· Jumat, 14 Agustus 2026</span></span>
+        <button type="button" class="popup-close" id="popup-close">Tutup</button>
+      </div>
+      <div class="popup-body">
+        <h2 id="popup-title">Ketentuan Seleksi New Hire</h2>
+        <ol class="popup-rules">
+          <li>Peserta wajib <b>hadir tepat waktu</b> sesuai dengan jadwal yang telah ditentukan.</li>
+          <li>Peserta wajib <b>membawa dan mempersiapkan laptop serta alat tulis</b> yang diperlukan selama proses seleksi. Perangkat yang digunakan harus dalam kondisi siap digunakan sebelum seleksi dimulai.</li>
+          <li>Selama proses seleksi berlangsung, peserta <b>dilarang menggunakan telepon seluler maupun alat bantu eksternal</b>, termasuk mesin pencari, aplikasi berbasis kecerdasan buatan (AI), catatan, atau sumber informasi lain yang dapat membantu dalam menjawab soal.</li>
+          <li>Peserta hanya diperkenankan membuka <b>halaman, dokumen, atau aplikasi yang digunakan untuk pelaksanaan seleksi</b> sesuai dengan ketentuan yang diberikan.</li>
+          <li>Seluruh soal wajib <b>dikerjakan secara mandiri</b>. Peserta tidak diperkenankan berdiskusi, bekerja sama, bertukar informasi, maupun melihat hasil pekerjaan peserta lain.</li>
+          <li><b>Seleksi Tahap 1 dan Seleksi Tahap 2 masing-masing dilaksanakan selama 30 menit.</b> Peserta diharapkan mengatur waktu pengerjaan dengan baik sesuai dengan batas waktu yang telah ditentukan.</li>
+          <li>Peserta yang hadir terlambat tetap mengikuti batas waktu seleksi yang telah ditetapkan dan <b>tidak memperoleh tambahan waktu pengerjaan</b>.</li>
+          <li>Apabila terjadi kendala teknis pada perangkat atau sistem selama proses seleksi, peserta wajib <b>segera melaporkannya kepada panitia</b> untuk mendapatkan penanganan lebih lanjut.</li>
+          <li>Seleksi menggunakan <b>sistem eliminasi berdasarkan hasil pada setiap tahap</b>, dengan ketentuan sebagai berikut:
+            <span class="sub"><b>a.</b> Setelah <b>Seleksi Tahap 1</b> selesai, <b>tiga peserta dengan perolehan nilai terendah</b> tidak dapat melanjutkan ke Seleksi Tahap 2.</span>
+            <span class="sub"><b>b.</b> Setelah <b>Seleksi Tahap 2</b> selesai, <b>dua peserta dengan perolehan nilai terendah</b> dinyatakan tidak lolos seleksi.</span>
+            <span class="sub"><b>c.</b> Apabila terdapat nilai yang sama pada posisi yang menentukan kelulusan, <b>peringkat ditentukan berdasarkan waktu penyelesaian</b>, dengan peserta yang menyelesaikan pengerjaan lebih cepat memperoleh peringkat lebih tinggi.</span>
+          </li>
+          <li>Peserta wajib <b>mengikuti seluruh arahan panitia</b> selama proses seleksi berlangsung. Pelanggaran terhadap ketentuan seleksi dapat menjadi bahan pertimbangan dalam penilaian dan dapat menyebabkan peserta <b>dinyatakan gugur</b>.</li>
+        </ol>
+        <p class="popup-note">Ketentuan ini disusun untuk memberikan kesempatan yang setara kepada seluruh peserta serta menjaga proses seleksi agar berlangsung secara <b>objektif, tertib, dan adil</b>.</p>
+      </div>
+      <div class="popup-actions">
+        <button type="button" class="popup-cta" id="popup-cta">Mengerti &amp; Lanjut</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Nonaktifkan tombol Tahap 2 bila belum dibuka (config.js)
     (function () {
@@ -732,6 +911,30 @@
         });
       }
     })();
+
+    // Popup Ketentuan Seleksi: tampil saat portal dibuka, dapat ditutup.
+    document.addEventListener("DOMContentLoaded", function () {
+      var pop = document.getElementById("popup");
+      var close = document.getElementById("popup-close");
+      var cta = document.getElementById("popup-cta");
+      if (!pop || !close || !cta) return;
+      function openPop() {
+        pop.hidden = false;
+        document.body.style.overflow = "hidden";
+        close.focus();
+      }
+      function closePop() {
+        pop.hidden = true;
+        document.body.style.overflow = "";
+      }
+      openPop();
+      close.addEventListener("click", closePop);
+      cta.addEventListener("click", closePop);
+      pop.addEventListener("click", function (e) { if (e.target === pop) closePop(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !pop.hidden) closePop();
+      });
+    });
   </script>
 
 </body>
