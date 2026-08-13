@@ -9,5 +9,5 @@
    Vercel auto-deploy ±45 detik.
    ============================================================ */
 window.PORTAL_CONFIG = {
-  stage2Open: false
+  stage2Open: true
 };
