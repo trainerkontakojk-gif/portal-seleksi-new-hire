@@ -312,6 +312,31 @@
       cursor: default;
     }
 
+    .choice.closed {
+      cursor: default;
+    }
+
+    .choice.closed .arr {
+      display: none;
+    }
+
+    .choice.closed .st {
+      flex: 0 0 auto;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 5px 9px;
+      background: var(--surface);
+    }
+
+    .choice.closed:hover .arr {
+      transform: none;
+    }
+
     .choice .num {
       flex: 0 0 30px;
       height: 30px;
@@ -791,39 +816,39 @@
         </div>
 
       <div class="hero-actions">
-        <p class="cta-line">Siap? <span class="accent">Mulai seleksimu</span> dan tunjukkan kemampuan terbaikmu.</p>
+        <p class="cta-line">Seleksi telah selesai. <span class="accent">Terima kasih</span> atas partisipasi Anda.</p>
 
         <div class="choices">
 
-          <!-- GANTI: tautan form Seleksi Tahap 1 di bawah ini -->
-          <a class="choice" href="https://www.flexiquiz.com/SC/N/seleksinewhireagustus2026" target="_blank" rel="noopener">
+          <!-- Seleksi Tahap 1 — DITUTUP (seleksi selesai) -->
+          <div class="choice closed">
             <span class="num">01</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 1</span>
             </span>
             <span class="route all">Semua Kandidat</span>
-            <span class="arr">→</span>
-          </a>
+            <span class="st">Selesai</span>
+          </div>
 
-          <!-- GANTI: tautan form Seleksi Tahap 2 CCA OPS di bawah ini -->
-          <a class="choice" id="choice-ops" href="tahap-2.html?jalur=ops">
+          <!-- Seleksi Tahap 2 CCA OPS — DITUTUP (seleksi selesai) -->
+          <div class="choice closed" id="choice-ops">
             <span class="num">02</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 2 — CCA OPS</span>
             </span>
             <span class="route ops">Kandidat CCA OPS</span>
-            <span class="arr">→</span>
-          </a>
+            <span class="st">Selesai</span>
+          </div>
 
-          <!-- GANTI: tautan form Seleksi Tahap 2 CCA SLIK di bawah ini -->
-          <a class="choice" id="choice-slik" href="tahap-2.html?jalur=slik">
+          <!-- Seleksi Tahap 2 CCA SLIK — DITUTUP (seleksi selesai) -->
+          <div class="choice closed" id="choice-slik">
             <span class="num">02</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 2 — CCA SLIK</span>
             </span>
             <span class="route slik">Kandidat CCA SLIK</span>
-            <span class="arr">→</span>
-          </a>
+            <span class="st">Selesai</span>
+          </div>
 
         </div>
 
