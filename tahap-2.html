@@ -474,9 +474,42 @@
 
       <div class="eyebrow" id="eyebrow">Tahap 2 · Seleksi Lanjutan</div>
       <h1 id="title">Seleksi Tahap 2</h1>
-      <div class="lock-msg">
+      <div class="lock-msg" id="lock-msg">
         <b>Seleksi Tahap 2 telah selesai.</b>
         <p>Terima kasih atas partisipasi Anda dalam seleksi calon petugas Kontak OJK 157 Tahun 2026. Informasi lebih lanjut akan disampaikan oleh panitia/trainer.</p>
+      </div>
+
+      <!-- Tombol aksi Tahap 2 — aktif bila portalOpen=true (seleksi susulan) -->
+      <div class="actions" id="actions" hidden>
+
+        <!-- GANTI: tautan panduan Tahap 2 (jalur OPS) — tampil sebagai gambar halaman panduan; jalur SLIK diganti otomatis oleh skrip di bawah -->
+        <a class="action ghost" id="panduan-link" data-images="panduan-tahap2-ops-1.png" href="panduan-tahap2-ops-1.png" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 2v6h6"/>
+              <path d="M16 13H8M16 17H8M10 9H8"/>
+            </svg>
+          </span>
+          <span class="at">Panduan</span>
+          <span class="ad">Baca aturan dan tata cara pelaksanaan sebelum mulai mengerjakan.</span>
+          <span class="go">Buka Panduan <span class="arr">→</span></span>
+        </a>
+
+        <!-- GANTI: tautan akses ujian Tahap 2 -->
+        <a class="action primary" id="ujian-link" href="https://www.flexiquiz.com/SC/N/SeleksiNewHireTahap2CcaOps" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 10L12 5 2 10l10 5 10-5z"/>
+              <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
+              <path d="M22 10v6"/>
+            </svg>
+          </span>
+          <span class="at">Akses Ujian</span>
+          <span class="ad">Masuk ke soal seleksi. Siapkan waktu luang dan koneksi yang stabil.</span>
+          <span class="go">Mulai Ujian <span class="arr">→</span></span>
+        </a>
+
       </div>
 
       <a class="back" href="index.html">
@@ -493,6 +526,16 @@
   </div>
 
   <script>
+    // Mode portal (config.js): portalOpen=false → pesan seleksi selesai;
+    // portalOpen=true → tombol panduan & ujian aktif (seleksi susulan).
+    (function () {
+      var open = !!(window.PORTAL_CONFIG && window.PORTAL_CONFIG.portalOpen);
+      var actions = document.getElementById("actions");
+      var msg = document.getElementById("lock-msg");
+      if (actions) actions.hidden = !open;
+      if (msg) msg.hidden = open;
+    })();
+
     // Jalur spesialisasi dari URL (?jalur=ops / ?jalur=slik) — halaman tetap
     // berfungsi tanpa param (tampil netral "Seleksi Tahap 2").
     (function () {
