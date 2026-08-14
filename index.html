@@ -921,22 +921,6 @@
   </div>
 
   <script>
-    // Nonaktifkan tombol Tahap 2 bila belum dibuka (config.js)
-    (function () {
-      if (window.PORTAL_CONFIG && !window.PORTAL_CONFIG.stage2Open) {
-        ["choice-ops", "choice-slik"].forEach(function (id) {
-          var el = document.getElementById(id);
-          if (el) {
-            el.classList.add("disabled");
-            el.setAttribute("aria-disabled", "true");
-            el.removeAttribute("href");
-            var route = el.querySelector(".route");
-            if (route) route.textContent = "Belum Dibuka";
-          }
-        });
-      }
-    })();
-
     // Popup Ketentuan Seleksi: tampil saat portal dibuka, dapat ditutup.
     document.addEventListener("DOMContentLoaded", function () {
       var pop = document.getElementById("popup");

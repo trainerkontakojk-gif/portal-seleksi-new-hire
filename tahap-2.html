@@ -493,27 +493,6 @@
   </div>
 
   <script>
-    // Kunci halaman bila Tahap 2 belum dibuka (config.js)
-    (function () {
-      if (window.PORTAL_CONFIG && !window.PORTAL_CONFIG.stage2Open) {
-        var actions = document.querySelector(".actions");
-        var note = document.querySelector(".note-line");
-        var main = document.querySelector(".main-inner");
-        var back = document.querySelector(".back");
-        if (actions) actions.remove();
-        if (note) note.remove();
-        if (main) {
-          var msg = document.createElement("div");
-          msg.className = "lock-msg";
-          msg.innerHTML =
-            "<b>Seleksi Tahap 2 belum dibuka.</b>" +
-            "<p>Mohon menunggu pengumuman dari panitia/trainer. " +
-            "Halaman ini akan aktif setelah Tahap 1 selesai dilaksanakan.</p>";
-          main.insertBefore(msg, back || null);
-        }
-      }
-    })();
-
     // Jalur spesialisasi dari URL (?jalur=ops / ?jalur=slik) — halaman tetap
     // berfungsi tanpa param (tampil netral "Seleksi Tahap 2").
     (function () {
