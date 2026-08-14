@@ -316,7 +316,7 @@
       display: none;
     }
 
-    body.portal-closed .choice .st {
+    .choice.closed .st {
       flex: 0 0 auto;
       display: block;
       font-family: var(--mono);
@@ -330,16 +330,16 @@
       background: var(--surface);
     }
 
-    body.portal-closed .choice .arr {
+    .choice.closed .arr {
       display: none;
     }
 
-    body.portal-closed .choice {
+    .choice.closed {
       cursor: default;
       pointer-events: none;
     }
 
-    body.portal-closed .choice:hover .arr {
+    .choice.closed:hover .arr {
       transform: none;
     }
 
@@ -844,8 +844,8 @@
 
         <div class="choices">
 
-          <!-- Seleksi Tahap 1 — tautan aktif bila portalOpen=true -->
-          <a class="choice" id="choice-t1" href="https://www.flexiquiz.com/SC/N/seleksinewhireagustus2026" target="_blank" rel="noopener">
+          <!-- Seleksi Tahap 1 — aktif bila stage1Open=true -->
+          <a class="choice" id="choice-t1" data-stage="1" href="https://www.flexiquiz.com/SC/N/seleksinewhireagustus2026" target="_blank" rel="noopener">
             <span class="num">01</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 1</span>
@@ -855,8 +855,8 @@
             <span class="arr">→</span>
           </a>
 
-          <!-- Seleksi Tahap 2 CCA OPS — tautan aktif bila portalOpen=true -->
-          <a class="choice" id="choice-ops" href="tahap-2.html?jalur=ops">
+          <!-- Seleksi Tahap 2 CCA OPS — aktif bila stage2Open=true -->
+          <a class="choice" id="choice-ops" data-stage="2" href="tahap-2.html?jalur=ops">
             <span class="num">02</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 2 — CCA OPS</span>
@@ -866,8 +866,8 @@
             <span class="arr">→</span>
           </a>
 
-          <!-- Seleksi Tahap 2 CCA SLIK — tautan aktif bila portalOpen=true -->
-          <a class="choice" id="choice-slik" href="tahap-2.html?jalur=slik">
+          <!-- Seleksi Tahap 2 CCA SLIK — aktif bila stage2Open=true -->
+          <a class="choice" id="choice-slik" data-stage="2" href="tahap-2.html?jalur=slik">
             <span class="num">02</span>
             <span class="tt">
               <span class="t1">Seleksi Tahap 2 — CCA SLIK</span>
@@ -963,38 +963,58 @@
   </div>
 
   <script>
-    // Mode portal (config.js): portalOpen=false → pengumuman permanen + kartu
-    // tertutup; portalOpen=true → popup ketentuan + tautan seleksi aktif.
+    // Mode portal (config.js): stage1Open & stage2Open mengontrol kartu
+    // masing-masing; popup Ketentuan tampil bila salah satu tahap DIBUKA,
+    // popup pengumuman permanen tampil bila keduanya false.
     document.addEventListener("DOMContentLoaded", function () {
-      var open = !!(window.PORTAL_CONFIG && window.PORTAL_CONFIG.portalOpen);
-      var body = document.body;
+      var cfg = window.PORTAL_CONFIG || {};
+      var s1 = !!cfg.stage1Open;
+      var s2 = !!cfg.stage2Open;
+      var anyOpen = s1 || s2;
       var ann = document.getElementById("popup");
       var rules = document.getElementById("popup-rules");
-      var close = document.getElementById("popup-close");
-      var cta = document.getElementById("popup-cta");
       var ctaLine = document.getElementById("cta-line");
-      function closeRules() {
-        rules.hidden = true;
-        document.body.style.overflow = "";
-      }
-      if (open) {
-        body.classList.remove("portal-closed");
-        if (ann) ann.hidden = true;
-        if (ctaLine) {
-          ctaLine.innerHTML = "Siap? <span class=\"accent\">Mulai seleksimu</span> dan tunjukkan kemampuan terbaikmu.";
+
+      function setCard(id, open) {
+        var c = document.getElementById(id);
+        if (!c) return;
+        if (open) {
+          c.classList.remove("closed");
+          c.removeAttribute("tabindex");
+          c.removeAttribute("aria-disabled");
+        } else {
+          c.classList.add("closed");
+          c.setAttribute("tabindex", "-1");
+          c.setAttribute("aria-disabled", "true");
         }
+      }
+
+      setCard("choice-t1", s1);
+      setCard("choice-ops", s2);
+      setCard("choice-slik", s2);
+
+      if (anyOpen) {
+        if (ann) ann.hidden = true;
+        if (ctaLine) ctaLine.innerHTML = 'Siap? <span class="accent">Mulai seleksimu</span> dan tunjukkan kemampuan terbaikmu.';
         if (rules) {
           rules.hidden = false;
           document.body.style.overflow = "hidden";
-          if (close) close.addEventListener("click", closeRules);
-          if (cta) cta.addEventListener("click", closeRules);
-          rules.addEventListener("click", function (e) { if (e.target === rules) closeRules(); });
+          var closeBtn = document.getElementById("popup-close");
+          var ctaBtn = document.getElementById("popup-cta");
+          function closeRules() {
+            rules.hidden = true;
+            document.body.style.overflow = "";
+          }
+          if (closeBtn) closeBtn.addEventListener("click", closeRules);
+          if (ctaBtn) ctaBtn.addEventListener("click", closeRules);
+          rules.addEventListener("click", function (e) {
+            if (e.target === rules) closeRules();
+          });
           document.addEventListener("keydown", function (e) {
             if (e.key === "Escape" && !rules.hidden) closeRules();
           });
         }
       } else {
-        body.classList.add("portal-closed");
         if (rules) rules.hidden = true;
         if (ann) {
           ann.hidden = false;

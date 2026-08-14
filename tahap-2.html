@@ -479,7 +479,7 @@
         <p>Terima kasih atas partisipasi Anda dalam seleksi calon petugas Kontak OJK 157 Tahun 2026. Informasi lebih lanjut akan disampaikan oleh panitia/trainer.</p>
       </div>
 
-      <!-- Tombol aksi Tahap 2 — aktif bila portalOpen=true (seleksi susulan) -->
+      <!-- Tombol aksi Tahap 2 — aktif bila stage2Open=true (seleksi susulan) -->
       <div class="actions" id="actions" hidden>
 
         <!-- GANTI: tautan panduan Tahap 2 (jalur OPS) — tampil sebagai gambar halaman panduan; jalur SLIK diganti otomatis oleh skrip di bawah -->
@@ -526,10 +526,10 @@
   </div>
 
   <script>
-    // Mode portal (config.js): portalOpen=false → pesan seleksi selesai;
-    // portalOpen=true → tombol panduan & ujian aktif (seleksi susulan).
+    // Mode portal (config.js): stage2Open=false → pesan seleksi selesai;
+    // stage2Open=true → tombol panduan & ujian aktif (seleksi susulan).
     (function () {
-      var open = !!(window.PORTAL_CONFIG && window.PORTAL_CONFIG.portalOpen);
+      var open = !!(window.PORTAL_CONFIG && window.PORTAL_CONFIG.stage2Open);
       var actions = document.getElementById("actions");
       var msg = document.getElementById("lock-msg");
       if (actions) actions.hidden = !open;
