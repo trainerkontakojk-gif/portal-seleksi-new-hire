@@ -963,13 +963,14 @@
   </div>
 
   <script>
-    // Mode portal (config.js): stage1Open & stage2Open mengontrol kartu
-    // masing-masing; popup Ketentuan tampil bila salah satu tahap DIBUKA,
-    // popup pengumuman permanen tampil bila keduanya false.
+    // Mode portal (config.js): portalOpen = kunci master laman.
+    // false → pengumuman permanen + semua kartu tertutup;
+    // true  → stage1Open & stage2Open menentukan tiap kartu;
+    // popup Ketentuan tampil bila salah satu tahap DIBUKA.
     document.addEventListener("DOMContentLoaded", function () {
       var cfg = window.PORTAL_CONFIG || {};
-      var s1 = !!cfg.stage1Open;
-      var s2 = !!cfg.stage2Open;
+      var s1 = !!(cfg.portalOpen && cfg.stage1Open);
+      var s2 = !!(cfg.portalOpen && cfg.stage2Open);
       var anyOpen = s1 || s2;
       var ann = document.getElementById("popup");
       var rules = document.getElementById("popup-rules");

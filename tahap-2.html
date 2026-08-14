@@ -526,10 +526,11 @@
   </div>
 
   <script>
-    // Mode portal (config.js): stage2Open=false → pesan seleksi selesai;
-    // stage2Open=true → tombol panduan & ujian aktif (seleksi susulan).
+    // Mode portal (config.js): portalOpen (master) + stage2Open.
+    // false → pesan seleksi selesai; true → tombol panduan & ujian aktif.
     (function () {
-      var open = !!(window.PORTAL_CONFIG && window.PORTAL_CONFIG.stage2Open);
+      var cfg = window.PORTAL_CONFIG || {};
+      var open = !!(cfg.portalOpen && cfg.stage2Open);
       var actions = document.getElementById("actions");
       var msg = document.getElementById("lock-msg");
       if (actions) actions.hidden = !open;
