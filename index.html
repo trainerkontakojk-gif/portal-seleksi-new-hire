@@ -637,6 +637,24 @@
 
     .popup[hidden] { display: none; }
 
+    .popup-body.announce {
+      padding: 26px 28px 30px;
+    }
+
+    .popup-body.announce h2 {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .popup-body.announce p {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+    }
+
     .popup-panel {
       position: relative;
       width: min(720px, 100%);
@@ -887,62 +905,29 @@
 
   </main>
 
-  <!-- ================= POPUP KETENTUAN SELEKSI ================= -->
-  <div class="popup" id="popup" hidden>
-    <div class="popup-panel" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+  <!-- ================= POPUP PENGUMUMAN SELEKSI ================= -->
+  <div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <div class="popup-panel">
       <div class="popup-bar">
-        <span>Ketentuan Seleksi <span class="date">· Jumat, 14 Agustus 2026</span></span>
-        <button type="button" class="popup-close" id="popup-close">Tutup</button>
+        <span>Pengumuman <span class="date">· Portal Seleksi New Hire</span></span>
       </div>
-      <div class="popup-body">
-        <h2 id="popup-title">Ketentuan Seleksi New Hire</h2>
-        <ol class="popup-rules">
-          <li>Peserta wajib <b>hadir tepat waktu</b> sesuai dengan jadwal yang telah ditentukan.</li>
-          <li>Peserta wajib <b>membawa dan mempersiapkan laptop serta alat tulis</b> yang diperlukan selama proses seleksi. Perangkat yang digunakan harus dalam kondisi siap digunakan sebelum seleksi dimulai.</li>
-          <li>Selama proses seleksi berlangsung, peserta <b>dilarang menggunakan telepon seluler maupun alat bantu eksternal</b>, termasuk mesin pencari, aplikasi berbasis kecerdasan buatan (AI), catatan, atau sumber informasi lain yang dapat membantu dalam menjawab soal.</li>
-          <li>Peserta hanya diperkenankan membuka <b>halaman, dokumen, atau aplikasi yang digunakan untuk pelaksanaan seleksi</b> sesuai dengan ketentuan yang diberikan.</li>
-          <li>Seluruh soal wajib <b>dikerjakan secara mandiri</b>. Peserta tidak diperkenankan berdiskusi, bekerja sama, bertukar informasi, maupun melihat hasil pekerjaan peserta lain.</li>
-          <li><b>Seleksi Tahap 1 dan Seleksi Tahap 2 masing-masing dilaksanakan selama 30 menit.</b> Peserta diharapkan mengatur waktu pengerjaan dengan baik sesuai dengan batas waktu yang telah ditentukan.</li>
-          <li>Peserta yang hadir terlambat tetap mengikuti batas waktu seleksi yang telah ditetapkan dan <b>tidak memperoleh tambahan waktu pengerjaan</b>.</li>
-          <li>Apabila terjadi kendala teknis pada perangkat atau sistem selama proses seleksi, peserta wajib <b>segera melaporkannya kepada panitia</b> untuk mendapatkan penanganan lebih lanjut.</li>
-          <li>Seleksi menggunakan <b>sistem eliminasi berdasarkan hasil pada setiap tahap</b>, dengan ketentuan sebagai berikut:
-            <span class="sub"><b>a.</b> Setelah <b>Seleksi Tahap 1</b> selesai, <b>tiga peserta dengan perolehan nilai terendah</b> tidak dapat melanjutkan ke Seleksi Tahap 2.</span>
-            <span class="sub"><b>b.</b> Setelah <b>Seleksi Tahap 2</b> selesai, <b>tiga peserta dengan perolehan nilai terendah</b> dinyatakan tidak lolos seleksi.</span>
-            <span class="sub"><b>c.</b> Apabila terdapat nilai yang sama pada posisi yang menentukan kelulusan, <b>peringkat ditentukan berdasarkan waktu penyelesaian</b>, dengan peserta yang menyelesaikan pengerjaan lebih cepat memperoleh peringkat lebih tinggi.</span>
-          </li>
-          <li>Peserta wajib <b>mengikuti seluruh arahan panitia</b> selama proses seleksi berlangsung. Pelanggaran terhadap ketentuan seleksi dapat menjadi bahan pertimbangan dalam penilaian dan dapat menyebabkan peserta <b>dinyatakan gugur</b>.</li>
-        </ol>
-        <p class="popup-note">Ketentuan ini disusun untuk memberikan kesempatan yang setara kepada seluruh peserta serta menjaga proses seleksi agar berlangsung secara <b>objektif, tertib, dan adil</b>.</p>
-      </div>
-      <div class="popup-actions">
-        <button type="button" class="popup-cta" id="popup-cta">Mengerti &amp; Lanjut</button>
+      <div class="popup-body announce">
+        <h2 id="popup-title">Seleksi Telah Selesai</h2>
+        <p>Seleksi <b>Tahap 1</b> dan <b>Tahap 2</b> telah selesai dilaksanakan.</p>
+        <p>Kandidat yang dinyatakan lolos akan dihubungi oleh panitia/trainer untuk mengikuti tahap wawancara (interview). Mohon kesediaan kandidat untuk menunggu panggilan tersebut serta memantau informasi resmi yang disampaikan oleh panitia.</p>
+        <p>Terima kasih atas partisipasi Anda dalam seleksi calon petugas Kontak OJK 157 Tahun 2026.</p>
       </div>
     </div>
   </div>
 
   <script>
-    // Popup Ketentuan Seleksi: tampil saat portal dibuka, dapat ditutup.
+    // Popup pengumuman: tampil permanen dan tidak dapat ditutup.
     document.addEventListener("DOMContentLoaded", function () {
       var pop = document.getElementById("popup");
-      var close = document.getElementById("popup-close");
-      var cta = document.getElementById("popup-cta");
-      if (!pop || !close || !cta) return;
-      function openPop() {
+      if (pop) {
         pop.hidden = false;
         document.body.style.overflow = "hidden";
-        close.focus();
       }
-      function closePop() {
-        pop.hidden = true;
-        document.body.style.overflow = "";
-      }
-      openPop();
-      close.addEventListener("click", closePop);
-      cta.addEventListener("click", closePop);
-      pop.addEventListener("click", function (e) { if (e.target === pop) closePop(); });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && !pop.hidden) closePop();
-      });
     });
   </script>
 
