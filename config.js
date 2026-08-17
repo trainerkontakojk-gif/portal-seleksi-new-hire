@@ -30,7 +30,7 @@
    Vercel auto-deploy ±45-60 detik.
    ============================================================ */
 window.PORTAL_CONFIG = {
-  portalOpen: false,
+  portalOpen: true,
   stage1Open: false,
   stage2Open: false
 };
