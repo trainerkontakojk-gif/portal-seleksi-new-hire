@@ -31,6 +31,6 @@
    ============================================================ */
 window.PORTAL_CONFIG = {
   portalOpen: true,
-  stage1Open: false,
-  stage2Open: false
+  stage1Open: true,
+  stage2Open: true
 };
